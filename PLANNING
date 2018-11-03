@@ -1,1 +1,11 @@
 ﻿	Tetratasmagoria is a two player hybrid of Tetris and Touhou. While one player is trying to lay down an endless supply of tetrominos, the other is trying to survive an endless bullet hell boss battle. The better each player does, the harder the other player’s game gets. Whoever survives longer wins.
+
+	The name Tetratasmagoria is a combination of the Greek prefix for four, tetra-, and the English word phantasmagoria. The use of tetra- is a reference to Tetris and tetrominos. The use of phantasmagoria is a reference to Touhou 3:  Phantasmagoria of Dim.Dream, and Touhou 9: Phantasmagoria of Flower View. Both are unique for being two player competitive bullet hell games, and were what inspired Tetratasmagoria in the  first place.
+
+
+THE BASICS
+	Before a match starts, both players get the opportunity to choose a character. Each character has different stats and abilities which are shown on the character select screen, and described in more detail in the CHARACTERS section below. On this screen (and throughout the rest of the game), the player controlling the left side of the screen is referred to as the "left player" or "LP", and the player controlling the right side of the screen is referred to as the "right player" or "RP".
+
+	Each match consists of two rounds plus a tie breaker round (if necessary). During round one, the left player plays the tetromino hemi-game, and the right player plays the bullet hell hemi-game. During round two the left player plays the bullet hell hemi-game, and the right player plays the tetromino hemi-game. Before the tie breaker round starts, a coin is flipped to determine which player plays which hemi-game.
+
+	The tetromino hemi-game plays almost exactly like any other Tetris style game with one exception: clearing lines doesn't make the tetrominos drop faster. Instead, scoring points will make the boss that the other player is fighting more difficult.
