@@ -11,3 +11,14 @@ THE BASICS
 	The tetromino hemi-game plays almost exactly like any other Tetris style game with one exception: clearing lines doesn't make the tetrominos drop faster. Instead, scoring points will make the boss that the other player is fighting more difficult. The player loses when the the blocks pile up too high.
 
 	In the bullet hell hemi-game, the player tries to survive for as long as possible during an endless boss battle. Dealing damage will cause the other player's tetrominos to start falling faster. The player loses when they run out of heats.
+
+MISC DESIGN NOTES
+	If you ever need to list out the tetrominos (in code, documentation, or UI layout), list them in alphabetical order by their letter. If you need to list out the square colors, do the same, but place no square first (if applicable) and the generic square second (if applicable). For absolute clarity, the order is:
+	1. None
+	2. Generic (gray)
+	3. I
+	4. J
+	5. L
+	6. O
+	7. S
+	8. Z
