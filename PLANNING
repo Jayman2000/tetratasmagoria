@@ -8,4 +8,6 @@ THE BASICS
 
 	Each match consists of two rounds plus a tie breaker round (if necessary). During round one, the left player plays the tetromino hemi-game, and the right player plays the bullet hell hemi-game. During round two the left player plays the bullet hell hemi-game, and the right player plays the tetromino hemi-game. Before the tie breaker round starts, a coin is flipped to determine which player plays which hemi-game.
 
-	The tetromino hemi-game plays almost exactly like any other Tetris style game with one exception: clearing lines doesn't make the tetrominos drop faster. Instead, scoring points will make the boss that the other player is fighting more difficult.
+	The tetromino hemi-game plays almost exactly like any other Tetris style game with one exception: clearing lines doesn't make the tetrominos drop faster. Instead, scoring points will make the boss that the other player is fighting more difficult. The player loses when the the blocks pile up too high.
+
+	In the bullet hell hemi-game, the player tries to survive for as long as possible during an endless boss battle. Dealing damage will cause the other player's tetrominos to start falling faster. The player loses when they run out of heats.
