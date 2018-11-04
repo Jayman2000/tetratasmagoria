@@ -1,8 +1,8 @@
 
 # Godot-specific ignores
-.import/
-export.cfg
-export_presets.cfg
+project/.import/
+project/export.cfg
+project/export_presets.cfg
 
 # Mono-specific ignores
-.mono/
+project/.mono/
