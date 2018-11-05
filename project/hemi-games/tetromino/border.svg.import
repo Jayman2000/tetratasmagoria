@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/squares.svg-07e03d31d397ad1dcb530d611769379b.stex"
+path="res://.import/border.svg-c859a7513bf46a5c49e9ab51d3a00c0f.stex"
 
 [deps]
 
-source_file="res://hemi-games/tetromino/squares.svg"
-dest_files=[ "res://.import/squares.svg-07e03d31d397ad1dcb530d611769379b.stex" ]
+source_file="res://hemi-games/tetromino/border.svg"
+dest_files=[ "res://.import/border.svg-c859a7513bf46a5c49e9ab51d3a00c0f.stex" ]
 
 [params]
 

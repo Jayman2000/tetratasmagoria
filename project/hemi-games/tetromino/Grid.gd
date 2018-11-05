@@ -24,9 +24,7 @@ func _ready():
 	var SQUARE_HEIGHT = SQUARES.get_width() / 8
 	var HEIGHT_IN_PIXELS = SQUARE_HEIGHT * HEIGHT # height of the entire grid
 	
-	$Lines.position.y -= SQUARE_HEIGHT
-	
-	for r in range(HEIGHT): # add extra space over the top to make room for off screen locks (make sure the border covers it)
+	for r in range(HEIGHT*2): # add extra space over the top to make room for off screen locks (make sure the border covers it)
 		squares.append([])
 		for c in range(WIDTH):
 			var to_add = Sprite.new()
@@ -37,7 +35,16 @@ func _ready():
 			# Make sure the sprite is in the right position
 			to_add.centered = false
 			var x = c * SQUARE_WIDTH
-			var y = HEIGHT_IN_PIXELS - (r+1) * SQUARE_HEIGHT
+			var y = -((r+1) * SQUARE_HEIGHT)
+			"""
+			Explanation of the formula for calculating y:
+			
+			The point (0, 0) is on the bottom left most corner of the grid. As y decreases, we move up the grid.
+			The (r+1) is there because the Sprites's orgins are at their top left corner, and we don't want the
+			0th row to be below the grid.
+			the -(*rest of the equation*) part is due to the fact that as y decreases we move up (as opposed to
+			moving down when y decreases)
+			"""
 			to_add.position = Vector2(x, y)
 			
 			to_add.hide()
