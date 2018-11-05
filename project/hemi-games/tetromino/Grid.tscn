@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://hemi-games/tetromino/Grid.gd" type="Script" id=1]
 [ext_resource path="res://hemi-games/tetromino/squares.svg" type="Texture" id=2]
+[ext_resource path="res://hemi-games/tetromino/grid.svg" type="Texture" id=3]
 
 [node name="Grid" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 SQUARES = ExtResource( 2 )
+
+[node name="Lines" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 3 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
 
 
