@@ -124,7 +124,7 @@ func spawn_tetromino():
 	$Grid.squares[SPAWN_OFFSET.r][SPAWN_OFFSET.c].frame = frame
 	$Grid.squares[SPAWN_OFFSET.r][SPAWN_OFFSET.c].show()
 	
-	for base_location in current_tetromino.LAYOUT:
+	for base_location in current_tetromino.SQUARE_LOCATIONS:
 		var translated_location = base_location.add(SPAWN_OFFSET)
 		$Grid.squares[translated_location.r][translated_location.c].frame = frame
 		$Grid.squares[translated_location.r][translated_location.c].show()

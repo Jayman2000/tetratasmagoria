@@ -14,10 +14,8 @@
 
 
 ## tetromino/I.gd
-# Static information about the I tetromino
-extends Object
-const Location = preload("res://hemi-games/tetromino/Location.gd")
+# Static information about the I tetromino (See Tetromino.gd for more helpful comments).
+extends "res://hemi-games/tetromino/Tetromino.gd"
 
-# The position of each square in default orientation. It is assumed that
-# (0, 0) has a square in it, even though it's not listed here.
-var LAYOUT = [Location.new( 0, -1),                       Location.new( 0,  1), Location.new( 0,  2)]
+func _ready():
+	SQUARE_LOCATIONS = [Location.new( 0, -1),                       Location.new( 0,  1), Location.new( 0,  2)]

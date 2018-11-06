@@ -14,9 +14,9 @@
 
 
 ## tetromino/O.gd
-# Static information about the O tetromino (See I.gd for more helpful comments).
-extends Object
-const Location = preload("res://hemi-games/tetromino/Location.gd")
+# Static information about the O tetromino (See Tetromino.gd for more helpful comments).
+extends "res://hemi-games/tetromino/Tetromino.gd"
 
-var LAYOUT = [Location.new( 1,  0), Location.new( 1,  1),
-                                    Location.new( 0,  1)]
+func _ready():
+	SQUARE_LOCATIONS = [Location.new( 1,  0), Location.new( 1,  1),
+                                              Location.new( 0,  1)]
