@@ -5,14 +5,6 @@ const HEIGHT = 20 # in squares
 
 # NOTE: It is assumed that SQUARES is a horizontal sprite sheet with 8 sprites
 export(Texture) var SQUARES = null
-const SQUARE_GENERIC = 0
-const SQUARE_I = 1
-const SQUARE_J = 2
-const SQUARE_L = 3
-const SQUARE_O = 4
-const SQUARE_S = 5
-const SQUARE_T = 6
-const SQUARE_Z = 7
 
 var squares = []
 
