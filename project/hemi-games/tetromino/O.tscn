@@ -3,7 +3,7 @@
 [ext_resource path="res://hemi-games/tetromino/O.gd" type="Script" id=1]
 [ext_resource path="res://hemi-games/tetromino/Square.tscn" type="PackedScene" id=2]
 
-[node name="O" type="Node2D"]
+[node name="O" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 

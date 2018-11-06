@@ -16,6 +16,8 @@
 ## tetromino/Main.gd
 # Main code for the tetromino hemi-game
 extends Node
+const Location = preload("res://hemi-games/tetromino/Location.gd")
+
 
 const GENERIC = 0
 const I = preload("res://hemi-games/tetromino/I.tscn")
@@ -110,7 +112,7 @@ func pop_next():
 
 
 ## Falling
-const SPAWN_POINT = Vector2(4, 20)
+var SPAWN_OFFSET = Location.new(20, 4)
 var current_tetromino
 
 func spawn_tetromino():
@@ -119,13 +121,14 @@ func spawn_tetromino():
 	
 	var frame = current_tetromino.get_node("Square").frame
 	
-	$Grid.squares[SPAWN_POINT.y][SPAWN_POINT.x].frame = frame
-	$Grid.squares[SPAWN_POINT.y][SPAWN_POINT.x].show()
+	$Grid.squares[SPAWN_OFFSET.r][SPAWN_OFFSET.c].frame = frame
+	$Grid.squares[SPAWN_OFFSET.r][SPAWN_OFFSET.c].show()
 	
-	for square_location in current_tetromino.LAYOUT:
-		square_location += SPAWN_POINT
-		$Grid.squares[square_location.y][square_location.x].frame = frame
-		$Grid.squares[square_location.y][square_location.x].show()
+	for base_location in current_tetromino.LAYOUT:
+		var translated_location = base_location.add(SPAWN_OFFSET)
+		$Grid.squares[translated_location.r][translated_location.c].frame = frame
+		$Grid.squares[translated_location.r][translated_location.c].show()
+
 
 func _ready():
 	## Random tetromino generator
@@ -133,6 +136,8 @@ func _ready():
 	for i in range(6):
 		next_six.push_back(grab_from_bag())
 	current_tetromino = pop_next()
+	
+	## Falling
 	spawn_tetromino()
 
 

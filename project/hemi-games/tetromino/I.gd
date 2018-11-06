@@ -15,8 +15,9 @@
 
 ## tetromino/I.gd
 # Static information about the I tetromino
-extends Node
+extends Object
+const Location = preload("res://hemi-games/tetromino/Location.gd")
 
 # The position of each square in default orientation. It is assumed that
 # (0, 0) has a square in it, even though it's not listed here.
-const LAYOUT = [Vector2(-1,  0),                  Vector2( 1,  0), Vector2( 2,  0)]
+var LAYOUT = [Location.new( 0, -1),                       Location.new( 0,  1), Location.new( 0,  2)]

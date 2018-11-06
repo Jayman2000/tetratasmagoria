@@ -15,7 +15,8 @@
 
 ## tetromino/L.gd
 # Static information about the L tetromino (See I.gd for more helpful comments).
-extends Node
+extends Object
+const Location = preload("res://hemi-games/tetromino/Location.gd")
 
-const LAYOUT = [                                  Vector2( 1,  1),
-                Vector2(-1,  0),                  Vector2( 1,  0)]
+var LAYOUT = [                                            Location.new( 1,  1),
+              Location.new( 0, -1),                       Location.new( 0,  1)]

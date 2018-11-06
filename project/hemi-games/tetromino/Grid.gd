@@ -15,7 +15,7 @@
 
 ## tetromino/Grid.gd
 # Setup the grid to display tiles
-extends Node2D
+extends Node
 
 const WIDTH = 10 # in squares
 const HEIGHT = 20 # in squares

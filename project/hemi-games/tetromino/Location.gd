@@ -13,10 +13,19 @@
 #   limitations under the License.
 
 
-## tetromino/O.gd
-# Static information about the O tetromino (See I.gd for more helpful comments).
-extends Object
-const Location = preload("res://hemi-games/tetromino/Location.gd")
+## tetromino/Location.gd
+# Location represents the location of a square in the grid
+var r
+var c
 
-var LAYOUT = [Location.new( 1,  0), Location.new( 1,  1),
-                                    Location.new( 0,  1)]
+func _init(row=0, column=0):
+	r = row
+	c = column
+
+# Takes either 1 argument, annother Location object, or two
+# ints, row and column.
+func add(row, column=null):
+	if column == null:
+		column = row.c
+		row = row.r
+	return get_script().new(r+row, c+column)
