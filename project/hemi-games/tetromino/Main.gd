@@ -112,22 +112,19 @@ func pop_next():
 
 
 ## Falling
-var SPAWN_OFFSET = Location.new(20, 4)
 var current_tetromino
 
 func spawn_tetromino():
 	current_tetromino.queue_free()
 	current_tetromino = pop_next()
-	
+	set_current_tetromino_visibility(true)
+
+func set_current_tetromino_visibility(visible):
 	var frame = current_tetromino.get_node("Square").frame
 	
-	$Grid.squares[SPAWN_OFFSET.r][SPAWN_OFFSET.c].frame = frame
-	$Grid.squares[SPAWN_OFFSET.r][SPAWN_OFFSET.c].show()
-	
-	for base_location in current_tetromino.SQUARE_LOCATIONS:
-		var translated_location = base_location.add(SPAWN_OFFSET)
-		$Grid.squares[translated_location.r][translated_location.c].frame = frame
-		$Grid.squares[translated_location.r][translated_location.c].show()
+	for location in current_tetromino.get_square_locations():
+		$Grid.squares[location.r][location.c].frame = frame
+		$Grid.squares[location.r][location.c].visible = visible
 
 
 func _ready():

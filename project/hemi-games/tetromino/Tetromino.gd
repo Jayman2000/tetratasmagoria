@@ -18,6 +18,16 @@
 extends Object
 const Location = preload("res://hemi-games/tetromino/Location.gd")
 
-# The position of each square in default orientation. It is assumed that
+# The current absolute location of the tetromino's relitive origin.
+var location = Location.new(20, 4)
+
+# The relitive location of each square in default orientation. It is assumed that
 # (0, 0) has a square in it, even though it's not listed here.
 var SQUARE_LOCATIONS
+
+# Returns a array with the absolute location of each square in the tetromino
+func get_square_locations():
+	var return_value = [location]
+	for l in SQUARE_LOCATIONS:
+		return_value.append(location.add(l))
+	return return_value
