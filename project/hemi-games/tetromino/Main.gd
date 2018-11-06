@@ -26,6 +26,7 @@ const S = preload("res://hemi-games/tetromino/S.tscn")
 const T = preload("res://hemi-games/tetromino/T.tscn")
 const Z = preload("res://hemi-games/tetromino/Z.tscn")
 
+
 ## Random tetromino generator
 var bag = []
 var next_six = []
@@ -102,21 +103,40 @@ func pop_next():
 	
 	var return_value = next_six.pop_front()
 	remove_child(return_value) # No longer needs to be drawn directly
-	
-	# Update next six display
 	for i in range(6):
 		next_six[i].position = get_node("Next%s" % [i]).position
 	
 	return return_value
+
+
+## Falling
+const SPAWN_POINT = Vector2(4, 20)
+var current_tetromino
+
+func spawn_tetromino():
+	current_tetromino.queue_free()
+	current_tetromino = pop_next()
+	
+	var frame = current_tetromino.get_node("Square").frame
+	
+	$Grid.squares[SPAWN_POINT.y][SPAWN_POINT.x].frame = frame
+	$Grid.squares[SPAWN_POINT.y][SPAWN_POINT.x].show()
+	
+	for square_location in current_tetromino.LAYOUT:
+		square_location += SPAWN_POINT
+		$Grid.squares[square_location.y][square_location.x].frame = frame
+		$Grid.squares[square_location.y][square_location.x].show()
 
 func _ready():
 	## Random tetromino generator
 	randomize()
 	for i in range(6):
 		next_six.push_back(grab_from_bag())
-	pop_next() # Initialize the next six display
+	current_tetromino = pop_next()
+	spawn_tetromino()
 
 
+# Tests
 func _on_Next6Test_timeout():
 	pop_next()
 
@@ -126,6 +146,7 @@ func _on_SwapTest_timeout():
 	var pieces = [I, J, L, O, S, T, Z]
 	if swap != null:
 		remove_child(swap)
+		swap.queue_free()
 	swap = pieces[randi() % pieces.size()].instance()
 	swap.position = $Swap.position
 	add_child(swap)
