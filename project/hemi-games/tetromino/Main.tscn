@@ -48,7 +48,19 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 840, 955 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Next6Test" type="Timer" parent="." index="8"]
+[node name="Swap" type="Position2D" parent="." index="8"]
+
+position = Vector2( 120, 235 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Next6Test" type="Timer" parent="." index="9"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[node name="SwapTest" type="Timer" parent="." index="10"]
 
 process_mode = 1
 wait_time = 1.0
@@ -56,5 +68,7 @@ one_shot = false
 autostart = true
 
 [connection signal="timeout" from="Next6Test" to="." method="_on_Next6Test_timeout"]
+
+[connection signal="timeout" from="SwapTest" to="." method="_on_SwapTest_timeout"]
 
 

@@ -103,3 +103,13 @@ func _ready():
 
 func _on_Next6Test_timeout():
 	pop_next()
+
+var swap
+
+func _on_SwapTest_timeout():
+	var pieces = [I, J, L, O, S, T, Z]
+	if swap != null:
+		remove_child(swap)
+	swap = pieces[randi() % pieces.size()].instance()
+	swap.position = $Swap.position
+	add_child(swap)
