@@ -3,7 +3,7 @@
 [ext_resource path="res://hemi-games/tetromino/Grid.gd" type="Script" id=1]
 [ext_resource path="res://hemi-games/tetromino/grid.svg" type="Texture" id=2]
 
-[node name="Grid" type="Node2D" index="0"]
+[node name="Grid" type="Node2D"]
 
 position = Vector2( 0, 1008 )
 script = ExtResource( 1 )

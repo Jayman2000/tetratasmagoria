@@ -1,18 +1,17 @@
-"""
-   Copyright 2018 Jason A. Yundt
+#   Copyright 2018 Jason A. Yundt
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-"""
 
 ## tetromino/Grid.gd
 # Setup the grid to display tiles
@@ -44,24 +43,21 @@ func _ready():
 			
 			# Make sure the sprite is in the right position
 			var x = c * SQUARE_WIDTH
-			"""
-			Explanation of the formula for calculating y:
-			
-			The point (0, 0) is on the bottom left most corner of the grid. As y decreases, we move up the grid.
-			The (r+1) is there because the Sprites's orgins are at their top left corner, and we don't want the
-			0th row to be below the grid.
-			the -(*rest of the equation*) part is due to the fact that as y decreases we move up (as opposed to
-			moving down when y decreases)
-			"""
+#			Explanation of the formula for calculating y:
+#
+#			The point (0, 0) is on the bottom left most corner of the grid. As y decreases, we move up the grid.
+#			The (r+1) is there because the Sprites's orgins are at their top left corner, and we don't want the
+#			0th row to be below the grid.
+#			the -(*rest of the equation*) part is due to the fact that as y decreases we move up (as opposed to
+#			moving down when y decreases)
 			var y = -((r+1) * SQUARE_HEIGHT)
 			to_add.position = Vector2(x, y)
 			
 			to_add.hide()
 			add_child(to_add)
 
-"""
-# Debug/testing functions
-func print_squares():
-	for r in range(HEIGHT):
-		print("%2s: %s" % [r, squares[r]])
-"""
+
+## Debug/testing functions
+#func print_squares():
+#	for r in range(HEIGHT):
+#		print("%2s: %s" % [r, squares[r]])
