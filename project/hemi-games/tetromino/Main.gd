@@ -1,13 +1,13 @@
 extends Node
 
 const GENERIC = 0
-const I = 1
-const J = 2
-const L = 3
-const O = 4
-const S = 5
-const T = 6
-const Z = 7
+const I = preload("res://hemi-games/tetromino/I.tscn")
+const J = preload("res://hemi-games/tetromino/J.tscn")
+const L = preload("res://hemi-games/tetromino/L.tscn")
+const O = preload("res://hemi-games/tetromino/O.tscn")
+const S = preload("res://hemi-games/tetromino/S.tscn")
+const T = preload("res://hemi-games/tetromino/T.tscn")
+const Z = preload("res://hemi-games/tetromino/Z.tscn")
 
 ## Random tetromino generator
 var bag = []
@@ -16,6 +16,7 @@ var next_six = []
 const RAND_MAX = 4294967280
 
 func grab_from_bag():
+	# Refill the bag if necessary
 	if bag.size() == 0:
 		"""
 		The following shuffles  the bag using the Fisher-Yates algorithm
@@ -76,14 +77,29 @@ func grab_from_bag():
 			bag[j] = tmp
 			
 			i -= 1
-	return bag.pop_front()
+	var return_value = bag.pop_front().instance()
+	add_child(return_value)
+	return return_value
 
 func pop_next():
 	next_six.push_back(grab_from_bag())
-	return next_six.pop_front()
+	
+	var return_value = next_six.pop_front()
+	remove_child(return_value) # No longer needs to be drawn directly
+	
+	# Update next six display
+	for i in range(6):
+		next_six[i].position = get_node("Next%s" % [i]).position
+	
+	return return_value
 
 func _ready():
 	## Random tetromino generator
 	randomize()
 	for i in range(6):
 		next_six.push_back(grab_from_bag())
+	pop_next() # Initialize the next six display
+
+
+func _on_Next6Test_timeout():
+	pop_next()

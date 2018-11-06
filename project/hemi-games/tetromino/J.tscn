@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://hemi-games/tetromino/Square.tscn" type="PackedScene" id=1]
+
+[node name="J" type="Node2D" index="0"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="Square" parent="." index="0" instance=ExtResource( 1 )]
+
+position = Vector2( -48, -24 )
+centered = true
+frame = 2
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="Square2" parent="." index="1" instance=ExtResource( 1 )]
+
+position = Vector2( -48, 24 )
+centered = true
+frame = 2
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="Square3" parent="." index="2" instance=ExtResource( 1 )]
+
+position = Vector2( 0, 24 )
+centered = true
+frame = 2
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="Square4" parent="." index="3" instance=ExtResource( 1 )]
+
+position = Vector2( 48, 24 )
+centered = true
+frame = 2
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+

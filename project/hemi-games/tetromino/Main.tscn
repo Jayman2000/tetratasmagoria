@@ -18,4 +18,43 @@ texture = ExtResource( 3 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
+[node name="Next0" type="Position2D" parent="." index="2"]
+
+position = Vector2( 840, 205 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Next1" type="Position2D" parent="." index="3"]
+
+position = Vector2( 840, 355 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Next2" type="Position2D" parent="." index="4"]
+
+position = Vector2( 840, 505 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Next3" type="Position2D" parent="." index="5"]
+
+position = Vector2( 840, 655 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Next4" type="Position2D" parent="." index="6"]
+
+position = Vector2( 840, 805 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Next5" type="Position2D" parent="." index="7"]
+
+position = Vector2( 840, 955 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Next6Test" type="Timer" parent="." index="8"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="Next6Test" to="." method="_on_Next6Test_timeout"]
+
 
