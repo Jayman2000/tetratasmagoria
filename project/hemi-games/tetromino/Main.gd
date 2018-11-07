@@ -143,7 +143,7 @@ func _ready():
 	spawn_tetromino()
 
 
-# Tests
+## Tests
 func _on_Next6Test_timeout():
 	pop_next()
 
