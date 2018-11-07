@@ -13,22 +13,17 @@
 #   limitations under the License.
 
 
-## tetromino/Location.gd
-# Location represents the location of a square in the grid
-var r
-var c
+## tetromino/FallTimer.gd
+# Custom timer (needed for proper handling of soft droping)
+extends Node
 
-func _init(row=0, column=0):
-	r = row
-	c = column
+signal timeout
+export(float) var wait_time = 1.0
 
-# Takes either 1 argument, annother Location object, or two
-# ints, row and column.
-func add(row, column=null):
-	if column == null:
-		column = row.c
-		row = row.r
-	return get_script().new(r+row, c+column)
+var time_passed = 0.0
 
-func to_str():
-	return "{%2d, %2d}" % [r, c]
+func _process(delta):
+	time_passed += delta
+	if time_passed >= wait_time:
+		emit_signal("timeout")
+		time_passed -= wait_time

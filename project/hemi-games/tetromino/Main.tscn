@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://hemi-games/tetromino/Main.gd" type="Script" id=1]
 [ext_resource path="res://hemi-games/tetromino/Grid.tscn" type="PackedScene" id=2]
 [ext_resource path="res://hemi-games/tetromino/border.svg" type="Texture" id=3]
+[ext_resource path="res://hemi-games/tetromino/FallTimer.gd" type="Script" id=4]
 
 [node name="Main" type="Node" index="0"]
 
@@ -67,8 +68,15 @@ wait_time = 1.0
 one_shot = false
 autostart = true
 
+[node name="FallTimer" type="Node" parent="." index="11"]
+
+script = ExtResource( 4 )
+wait_time = 1.0
+
 [connection signal="timeout" from="Next6Test" to="." method="_on_Next6Test_timeout"]
 
 [connection signal="timeout" from="SwapTest" to="." method="_on_SwapTest_timeout"]
+
+[connection signal="timeout" from="FallTimer" to="." method="_on_FallTimer_timeout"]
 
 

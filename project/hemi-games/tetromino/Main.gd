@@ -126,6 +126,11 @@ func set_current_tetromino_visibility(visible):
 		$Grid.squares[location.r][location.c].frame = frame
 		$Grid.squares[location.r][location.c].visible = visible
 
+func _on_FallTimer_timeout():
+	set_current_tetromino_visibility(false)
+	current_tetromino.location.r -= 1
+	set_current_tetromino_visibility(true)
+
 
 func _ready():
 	## Random tetromino generator
