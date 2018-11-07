@@ -37,3 +37,6 @@ func start():
 
 func stop():
 	set_process(false)
+
+func is_stopped():
+	return not is_processing()

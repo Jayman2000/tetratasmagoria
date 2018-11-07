@@ -115,6 +115,7 @@ func spawn_tetromino():
 	current_tetromino = pop_next()
 	set_current_tetromino_visibility(true)
 	$FallTimer.start()
+	lowest_row = current_tetromino.location.r
 
 
 ## Movement
@@ -136,11 +137,18 @@ func _on_FallTimer_timeout():
 
 
 ## Locking
+var marked_for_lock = false
+var lowest_row
+
+func mark_for_lock():
+	marked_for_lock = true
+
 func lock():
 	for location in current_tetromino.get_square_locations():
 		$Grid.get_square(location).active = true
 	$FallTimer.stop()
 	$SpawnDelay.start()
+	marked_for_lock = false
 
 
 var movement_queue = Location.new(0, 0) # r should never be positive
@@ -153,26 +161,47 @@ func _ready():
 	current_tetromino = pop_next()
 
 func _process(delta):
+#	print($LockTimer.is_stopped())
 	$FallTimer.is_soft_droping = Input.is_action_pressed("ui_down")
-	if Input.is_action_pressed("ui_left"):
-		movement_queue.c -= 1
-	if Input.is_action_pressed("ui_right"):
-		movement_queue.c += 1
+	if $SpawnDelay.is_stopped():
+		if Input.is_action_pressed("ui_left"):
+			movement_queue.c -= 1
+		if Input.is_action_pressed("ui_right"):
+			movement_queue.c += 1
 	
-	## Movement/Falling
-	if movement_queue.r != 0 or movement_queue.c != 0:
-		set_current_tetromino_visibility(false)
+		## Movement/Falling
+		if movement_queue.r != 0 or movement_queue.c != 0:
+			set_current_tetromino_visibility(false)
 		
-		handle_left_right_movement()
-		handle_down_movement()
+			handle_left_right_movement()
+			handle_down_movement()
 		
-		set_current_tetromino_visibility(true)
+			set_current_tetromino_visibility(true)
 		
-		for location in current_tetromino.get_square_locations():
-			var location_below = location.add(-1, 0)
-			if location_below.r < 0 or $Grid.get_square(location_below).active:
-				lock()
+			## Locking
+			var on_surface = false
+			for location in current_tetromino.get_square_locations():
+				var location_below = location.add(-1, 0)
+				if location_below.r < 0 or $Grid.get_square(location_below).active:
+					on_surface = true
+					break
+		
+			if not on_surface:
+				if $FallTimer.is_stopped():
+					$FallTimer.start()
+				if current_tetromino.location.c < lowest_row:
+					$LockTimer.stop()
+					marked_for_lock = false
+			else:
+				if marked_for_lock:
+					lock()
+				else:
+					if $LockTimer.is_stopped():
+						$LockTimer.start()
+			lowest_row = min(lowest_row, current_tetromino.location.r)
 
+
+# Both handle_left_right_movement and handle_down movement return the number of squares the tetromino was actually moved
 func handle_left_right_movement():
 	var direction # -1 for left, and +1 for right
 	if movement_queue.c < 0:
