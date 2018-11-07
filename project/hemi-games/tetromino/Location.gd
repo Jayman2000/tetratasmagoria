@@ -36,5 +36,8 @@ func sub(row, column=null):
 		row = row.r
 	return get_script().new(r-row, c-column)
 
+func rotate_clockwise():
+	return get_script().new(-c, r)
+
 func to_str():
 	return "{%2d, %2d}" % [r, c]
