@@ -180,7 +180,7 @@ func _process(delta):
 			## Locking
 			var on_surface = false
 			for location in current_tetromino.get_square_locations():
-				var location_below = location.add(-1, 0)
+				var location_below = location.sub(1, 0)
 				if location_below.r < 0 or $Grid.get_square(location_below).active:
 					on_surface = true
 					break
@@ -221,7 +221,7 @@ func handle_left_right_movement():
 func handle_down_movement():
 	while movement_queue.r != 0:
 		for location in current_tetromino.get_square_locations():
-			var new_location = location.add(-1, 0)
+			var new_location = location.sub(1, 0)
 			if new_location.r < 0 or $Grid.get_square(new_location).active:
 				movement_queue.r = 0
 				return
@@ -240,3 +240,9 @@ func _on_SwapTest_timeout():
 	swap = pieces[randi() % pieces.size()].instance()
 	swap.position = $Swap.position
 	add_child(swap)
+
+func set_grid(locations):
+	for location in locations:
+		var square = $Grid.get_square(location)
+		square.show()
+		square.active = true

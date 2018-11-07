@@ -30,5 +30,11 @@ func add(row, column=null):
 		row = row.r
 	return get_script().new(r+row, c+column)
 
+func sub(row, column=null):
+	if column == null:
+		column = row.c
+		row = row.r
+	return get_script().new(r-row, c-column)
+
 func to_str():
 	return "{%2d, %2d}" % [r, c]
