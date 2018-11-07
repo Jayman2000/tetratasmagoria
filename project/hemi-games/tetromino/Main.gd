@@ -127,9 +127,20 @@ func set_current_tetromino_visibility(visible):
 		$Grid.squares[location.r][location.c].visible = visible
 
 func _on_FallTimer_timeout():
-	set_current_tetromino_visibility(false)
-	current_tetromino.location.r -= 1
-	set_current_tetromino_visibility(true)
+	var can_fall = true
+	for l in current_tetromino.get_floor():
+		print(l.to_str())
+		if l.r == -1 or $Grid.squares[l.r][l.c].visible:
+			can_fall = false
+			break
+	
+	if can_fall:
+		set_current_tetromino_visibility(false)
+		current_tetromino.location.r -= 1
+		set_current_tetromino_visibility(true)
+	else:
+		# Start locking
+		spawn_tetromino()
 
 
 func _ready():
@@ -144,9 +155,6 @@ func _ready():
 
 
 ## Tests
-func _on_Next6Test_timeout():
-	pop_next()
-
 var swap
 
 func _on_SwapTest_timeout():

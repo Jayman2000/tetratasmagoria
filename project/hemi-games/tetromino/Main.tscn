@@ -17,7 +17,7 @@ position = Vector2( 240, 1030 )
 
 texture = ExtResource( 3 )
 centered = false
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Visibility" ]
 
 [node name="Next0" type="Position2D" parent="." index="2"]
 
@@ -54,26 +54,17 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 120, 235 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Next6Test" type="Timer" parent="." index="9"]
+[node name="SwapTest" type="Timer" parent="." index="9"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = true
 
-[node name="SwapTest" type="Timer" parent="." index="10"]
-
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = true
-
-[node name="FallTimer" type="Node" parent="." index="11"]
+[node name="FallTimer" type="Node" parent="." index="10"]
 
 script = ExtResource( 4 )
-wait_time = 1.0
-
-[connection signal="timeout" from="Next6Test" to="." method="_on_Next6Test_timeout"]
+wait_time = 0.25
 
 [connection signal="timeout" from="SwapTest" to="." method="_on_SwapTest_timeout"]
 
