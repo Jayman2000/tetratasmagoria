@@ -110,15 +110,18 @@ func pop_next():
 	
 	return return_value
 
-
-## Falling
-var current_tetromino
-
 func spawn_tetromino():
 	current_tetromino.queue_free()
 	current_tetromino = pop_next()
 	set_current_tetromino_visibility(true)
+	$FallTimer.start()
 
+
+## Movement
+var current_tetromino 
+
+# set_current_tetromino_visibility(false) should be called before a tetromino moves/rotates, and
+# set_current_tetromino_visibility(true) should be called afterwords
 func set_current_tetromino_visibility(visible):
 	var frame = current_tetromino.get_node("Square").frame
 	
@@ -126,22 +129,21 @@ func set_current_tetromino_visibility(visible):
 		$Grid.squares[location.r][location.c].frame = frame
 		$Grid.squares[location.r][location.c].visible = visible
 
-func _on_FallTimer_timeout():
-	var can_fall = true
-	for l in current_tetromino.get_floor():
-		print(l.to_str())
-		if l.r == -1 or $Grid.squares[l.r][l.c].visible:
-			can_fall = false
-			break
-	
-	if can_fall:
-		set_current_tetromino_visibility(false)
-		current_tetromino.location.r -= 1
-		set_current_tetromino_visibility(true)
-	else:
-		# Start locking
-		spawn_tetromino()
 
+## Falling
+func _on_FallTimer_timeout():
+	movement_queue.r -= 1
+
+
+## Locking
+func lock():
+	for location in current_tetromino.get_square_locations():
+		$Grid.get_square(location).active = true
+	$FallTimer.stop()
+	$SpawnDelay.start()
+
+
+var movement_queue = Location.new(0, 0) # r should never be positive
 
 func _ready():
 	## Random tetromino generator
@@ -149,9 +151,53 @@ func _ready():
 	for i in range(6):
 		next_six.push_back(grab_from_bag())
 	current_tetromino = pop_next()
+
+func _process(delta):
+	$FallTimer.is_soft_droping = Input.is_action_pressed("ui_down")
+	if Input.is_action_pressed("ui_left"):
+		movement_queue.c -= 1
+	if Input.is_action_pressed("ui_right"):
+		movement_queue.c += 1
 	
-	## Falling
-	spawn_tetromino()
+	## Movement/Falling
+	if movement_queue.r != 0 or movement_queue.c != 0:
+		set_current_tetromino_visibility(false)
+		
+		handle_left_right_movement()
+		handle_down_movement()
+		
+		set_current_tetromino_visibility(true)
+		
+		for location in current_tetromino.get_square_locations():
+			var location_below = location.add(-1, 0)
+			if location_below.r < 0 or $Grid.get_square(location_below).active:
+				lock()
+
+func handle_left_right_movement():
+	var direction # -1 for left, and +1 for right
+	if movement_queue.c < 0:
+		direction = -1
+	else:
+		direction = 1
+	while movement_queue.c != 0:
+		for location in current_tetromino.get_square_locations():
+			var new_location = location.add(0, direction)
+			if new_location.c < 0 or new_location.c >= $Grid.WIDTH or $Grid.get_square(new_location).active:
+				# Can't move anymore, so stop
+				movement_queue.c = 0
+				return
+		current_tetromino.location.c += direction
+		movement_queue.c -= direction
+
+func handle_down_movement():
+	while movement_queue.r != 0:
+		for location in current_tetromino.get_square_locations():
+			var new_location = location.add(-1, 0)
+			if new_location.r < 0 or $Grid.get_square(new_location).active:
+				movement_queue.r = 0
+				return
+		current_tetromino.location.r -= 1
+		movement_queue.r += 1
 
 
 ## Tests

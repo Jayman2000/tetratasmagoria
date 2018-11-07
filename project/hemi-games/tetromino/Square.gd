@@ -13,10 +13,9 @@
 #   limitations under the License.
 
 
-## tetromino/O.gd
-# Static information about the O tetromino (See Tetromino.gd for more helpful comments).
-extends "res://hemi-games/tetromino/Tetromino.gd"
+## tetromino/Square.gd
+# A square (either part of a tetromino or locked on to the grid).
+extends Object
 
-func _init():
-	SQUARE_LOCATIONS = [Location.new( 1,  0), Location.new( 1,  1),
-                                              Location.new( 0,  1)]
+# active is only set for squares that have been locked on to the grid
+var active = false

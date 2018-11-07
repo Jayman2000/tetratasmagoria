@@ -18,9 +18,9 @@
 extends Node
 
 const WIDTH = 10 # in squares
-const HEIGHT = 20 # in squares
+const HEIGHT = 40 # in squares (Note 20 extra squares are added for the buffer zone)
 
-# NOTE: It is assumed that SQUARES is a horizontal sprite sheet with 8 sprites
+# NOTE: It is assumed that SQUARES's texture is a horizontal sprite sheet with 8 sprites
 const SQUARE = preload("res://hemi-games/tetromino/Square.tscn")
 
 var squares = []
@@ -35,7 +35,7 @@ func _ready():
 	var HEIGHT_IN_PIXELS = SQUARE_HEIGHT * HEIGHT # height of the entire grid
 	tmp.free()
 	
-	for r in range(HEIGHT*2): # add extra space over the top to make room for off screen locks (make sure the border covers it)
+	for r in range(HEIGHT): # add extra space over the top to make room for off screen locks (make sure the border covers it)
 		squares.append([])
 		for c in range(WIDTH):
 			var to_add = SQUARE.instance()
@@ -56,6 +56,8 @@ func _ready():
 			to_add.hide()
 			add_child(to_add)
 
+func get_square(location):
+	return squares[location.r][location.c]
 
 ## Debug/testing functions
 #func print_squares():

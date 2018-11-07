@@ -17,6 +17,6 @@
 # Static information about the T tetromino (See Tetromino.gd for more helpful comments).
 extends "res://hemi-games/tetromino/Tetromino.gd"
 
-func _ready():
+func _init():
 	SQUARE_LOCATIONS = [                      Location.new( 1,  0),
                         Location.new( 0, -1),                       Location.new( 0,  1)]

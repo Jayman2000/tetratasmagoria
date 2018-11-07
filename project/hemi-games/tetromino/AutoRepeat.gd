@@ -13,10 +13,22 @@
 #   limitations under the License.
 
 
-## tetromino/O.gd
-# Static information about the O tetromino (See Tetromino.gd for more helpful comments).
-extends "res://hemi-games/tetromino/Tetromino.gd"
+## tetromino/AutoRepeat.gd
+# When left or right is held, the action is automatically repreated
+extends Timer
+
+const INITIAL_DELAY = 0.3
+const REPEAT_DELAY = 0.1
 
 func _init():
-	SQUARE_LOCATIONS = [Location.new( 1,  0), Location.new( 1,  1),
-                                              Location.new( 0,  1)]
+	._init()
+	wait_time = INITIAL_DELAY
+
+func start_repeating():
+	wait_time = REPEAT_DELAY
+	disconnect("timeout", self, "Start_repeating")
+
+func start():
+	wait_time = INITIAL_DELAY
+	.start()
+	connect("timeout", self, "start_repeating")

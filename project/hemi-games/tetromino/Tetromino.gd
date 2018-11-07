@@ -15,7 +15,7 @@
 
 ## tetromino/Tetromino.gd
 # Stuff common to all Tetrominos
-extends Object
+extends Node
 const Location = preload("res://hemi-games/tetromino/Location.gd")
 
 # The current absolute location of the tetromino's relitive origin.
@@ -32,15 +32,15 @@ func get_square_locations():
 		return_value.append(location.add(l))
 	return return_value
 
-# Return a list of locations that are immediately below this tetromino
-func get_floor():
-	var lowest_row = 0
-	for l in SQUARE_LOCATIONS:
-		lowest_row = min(lowest_row, l.r)
-	
-	var return_value = []
-	for l in [Location.new(0, 0)] + SQUARE_LOCATIONS:
-		if l.r == lowest_row:
-			return_value.append(l.add(location).add(-1, 0))
-	
-	return return_value
+## Return a list of locations that are immediately below this tetromino
+#func get_floor():
+#	var lowest_row = 0
+#	for l in SQUARE_LOCATIONS:
+#		lowest_row = min(lowest_row, l.r)
+#
+#	var return_value = []
+#	for l in [Location.new(0, 0)] + SQUARE_LOCATIONS:
+#		if l.r == lowest_row:
+#			return_value.append(l.add(location).add(-1, 0))
+#
+#	return return_value
