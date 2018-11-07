@@ -27,3 +27,10 @@ func _process(delta):
 	if time_passed >= wait_time:
 		emit_signal("timeout")
 		time_passed -= wait_time
+
+func stop():
+	set_process(false)
+	time_passed = 0.0
+
+func start():
+	set_process(true)
