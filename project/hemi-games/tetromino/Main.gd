@@ -161,7 +161,6 @@ func _ready():
 	current_tetromino = pop_next()
 
 func _process(delta):
-#	print($LockTimer.is_stopped())
 	$FallTimer.is_soft_droping = Input.is_action_pressed("ui_down")
 	if $SpawnDelay.is_stopped():
 		if Input.is_action_pressed("ui_left"):
@@ -215,6 +214,7 @@ func handle_left_right_movement():
 				# Can't move anymore, so stop
 				movement_queue.c = 0
 				return
+		$LockTimer.add_movement_or_rotation()
 		current_tetromino.location.c += direction
 		movement_queue.c -= direction
 
