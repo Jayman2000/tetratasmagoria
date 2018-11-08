@@ -95,6 +95,8 @@ script = ExtResource( 6 )
 
 [connection signal="timeout" from="FallTimer" to="." method="_on_FallTimer_timeout"]
 
+[connection signal="timeout" from="AutoRepeat" to="." method="move"]
+
 [connection signal="timeout" from="SpawnDelay" to="." method="spawn_tetromino"]
 
 [connection signal="timeout" from="LockTimer" to="." method="mark_for_lock"]

@@ -120,6 +120,7 @@ func spawn_tetromino():
 
 ## Movement
 var current_tetromino 
+var moving_left
 
 # set_current_tetromino_visibility(false) should be called before a tetromino moves/rotates, and
 # set_current_tetromino_visibility(true) should be called afterwords
@@ -129,6 +130,12 @@ func set_current_tetromino_visibility(visible):
 	for location in current_tetromino.get_square_locations():
 		$Grid.squares[location.r][location.c].frame = frame
 		$Grid.squares[location.r][location.c].visible = visible
+
+func move():
+	if moving_left:
+		movement_queue.c -= 1
+	else:
+		movement_queue.c += 1
 
 
 ## Falling
@@ -163,10 +170,11 @@ func _ready():
 func _process(delta):
 	$FallTimer.is_soft_droping = Input.is_action_pressed("ui_down")
 	if $SpawnDelay.is_stopped():
-		if Input.is_action_pressed("ui_left"):
-			movement_queue.c -= 1
-		if Input.is_action_pressed("ui_right"):
-			movement_queue.c += 1
+		if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_right"):
+			$AutoRepeat.stop()
+		else:
+			# Set moving_left and start timer
+			pass
 	
 		## Movement/Falling
 		if movement_queue.r != 0 or movement_queue.c != 0:
@@ -198,7 +206,6 @@ func _process(delta):
 					if $LockTimer.is_stopped():
 						$LockTimer.start()
 			lowest_row = min(lowest_row, current_tetromino.location.r)
-
 
 # Both handle_left_right_movement and handle_down movement return the number of squares the tetromino was actually moved
 func handle_left_right_movement():
