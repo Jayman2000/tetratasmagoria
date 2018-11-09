@@ -18,7 +18,7 @@
 extends Timer
 
 const INITIAL_DELAY = 0.3
-const REPEAT_DELAY = 0.1
+const REPEAT_DELAY = 0.05
 
 func _init():
 	._init()
@@ -26,9 +26,8 @@ func _init():
 
 func start_repeating():
 	wait_time = REPEAT_DELAY
-	disconnect("timeout", self, "Start_repeating")
 
 func start():
 	wait_time = INITIAL_DELAY
 	.start()
-	connect("timeout", self, "start_repeating")
+	connect("timeout", self, "start_repeating", [], CONNECT_ONESHOT)
