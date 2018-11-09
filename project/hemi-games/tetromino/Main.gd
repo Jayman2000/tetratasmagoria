@@ -137,11 +137,6 @@ func move():
 	else:
 		movement_queue.c += 1
 
-func start_moving(left):
-	moving_left = left
-	move()
-	$AutoRepeat.start()
-
 
 ## Falling
 func _on_FallTimer_timeout():
@@ -174,7 +169,9 @@ func _ready():
 
 func left_right_helper(action, left):
 	if Input.is_action_pressed(action) and $AutoRepeat.is_stopped():
-		start_moving(left)
+		moving_left = left
+		move()
+		$AutoRepeat.start()
 	elif Input.is_action_just_released(action):
 		$AutoRepeat.stop()
 

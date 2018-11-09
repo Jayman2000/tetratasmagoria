@@ -18,7 +18,7 @@
 extends Timer
 
 const INITIAL_DELAY = 0.3
-const REPEAT_DELAY = 0.05
+const REPEAT_DELAY = 0.025
 
 func _init():
 	._init()
@@ -26,8 +26,17 @@ func _init():
 
 func start_repeating():
 	wait_time = REPEAT_DELAY
+	# Since we modified the wait_time, we must restart the timer. Otherwise
+	# the timer will still act as if wait_time = INITIAL_DELAY until it emits
+	# "timeout" again.
+	.start()
 
 func start():
 	wait_time = INITIAL_DELAY
 	.start()
 	connect("timeout", self, "start_repeating", [], CONNECT_ONESHOT)
+
+func stop():
+	if is_connected("timeout", self, "start_repeating"):
+		disconnect("timeout", self, "start_repeating")
+	.stop()
